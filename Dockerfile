@@ -14,10 +14,7 @@ RUN pip install -r requirements.txt
 COPY src/ .
 
 # command to run on container start
-# CMD [ "python", "./server.py" ]
-CMD ["uwsgi",   "--http", \
-                "127.0.0.1:3031", \
-                "--mount", \
-                "/=server:app", \
-                "--uid=1000", \
-                "--gid=2000" ]
+# CMD [ "python3", "./server.py" ]
+CMD [ "gunicorn",   "-w 4", \
+                    "-b :3031", \
+                    "server:app"]
