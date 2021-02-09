@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: melvin
+  labels:
+    app: melvin
+spec:
+  ports:
+  - port: 3031
+    protocol: TCP
+  clusterIP: None
+  selector:
+    app: melvin
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: melvin
+  labels:
+    app: melvin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: melvin
+  template:
+    metadata:
+      labels:
+        app: melvin
+    spec:
+      containers:
+      - name: melvin
+        image: melvin

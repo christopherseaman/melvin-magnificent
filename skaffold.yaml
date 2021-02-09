@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta11
+kind: Config
+metadata:
+  name: melvin-magnificent
+build:
+  artifacts:
+  - image: melvin
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - deployment.yaml
+portForward:
+- resourceType: service
+  resourceName: melvin
+  port: 3031
